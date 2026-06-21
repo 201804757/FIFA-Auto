@@ -1,0 +1,20 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "outputRoot": "matches",
+  "trackerPath": "data/fifa_world_cup_video_tracker.xlsx",
+  "durationSeconds": 40,
+  "fps": 30,
+  "aspect": "9:16",
+  "render": {
+    "compositionId": "MatchRecap",
+    "muted": true,
+    "codec": "h264",
+    "crf": 18
+  },
+  "visuals": {
+    "policy": "procedural_or_licensed_only",
+    "useOfficialLogos": false,
+    "useBroadcastFootage": false,
+    "temporaryAssetDir": "tmp/assets"
+  }
+}

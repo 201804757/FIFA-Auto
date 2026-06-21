@@ -1,50 +1,10 @@
-name: Daily World Cup Video Assistant
+// Codex should implement this file.
+// Daily flow:
+// 1. Load config/env.
+// 2. Fetch completed matches.
+// 3. Read tracker workbook.
+// 4. Find completed matches not already Video Complete.
+// 5. For each uncovered match: create script.md, render silent video.mp4, update tracker.
+// 6. Validate match folder contains exactly video.mp4 and script.md.
 
-on:
-  workflow_dispatch:
-  schedule:
-    # 08:30 Asia/Dubai. Add a second run during the tournament if matches finish after this time.
-    - cron: '30 8 * * *'
-      timezone: 'Asia/Dubai'
-
-permissions:
-  contents: write
-
-concurrency:
-  group: worldcup-video-assistant
-  cancel-in-progress: false
-
-jobs:
-  create-videos:
-    runs-on: ubuntu-latest
-    env:
-      MATCH_DATA_PROVIDER: ${{ vars.MATCH_DATA_PROVIDER || 'fifa' }}
-      OUTPUT_ROOT: matches
-      TRACKER_PATH: data/fifa_world_cup_video_tracker.xlsx
-      FORCE_RERENDER: 'false'
-      VIDEO_DURATION_SECONDS: '40'
-      OUTPUT_ASPECT: '9:16'
-      STORAGE_TARGET: ${{ vars.STORAGE_TARGET || 'local' }}
-      SPORTS_API_KEY: ${{ secrets.SPORTS_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run check
-      - run: npm run daily
-      - run: npm run validate-output
-      - name: Commit generated outputs
-        run: |
-          git config user.name "worldcup-video-bot"
-          git config user.email "worldcup-video-bot@users.noreply.github.com"
-          git add data/fifa_world_cup_video_tracker.xlsx matches/ || true
-          if git diff --cached --quiet; then
-            echo "No new videos or tracker updates."
-          else
-            git commit -m "Add World Cup match recap video"
-            git push
-          fi
+console.log('TODO: implement daily FIFA World Cup video assistant.');
