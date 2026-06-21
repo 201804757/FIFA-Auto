@@ -1,0 +1,3 @@
+// Codex should implement this validation script.
+// It must fail if any folder under matches/ contains files other than video.mp4 and script.md.
+console.log('TODO: validate match folder contents.');
